@@ -11,7 +11,7 @@ var model = {"board":{"vendor":"IBM","model":"IBM-PC S-100","cpu":{"model":"8028
 app.get('/task3a/volumes', (req, res) => {
     var hdds = _.pick(model, 'hdd').hdd;
     var result = _.mapValues(_.zip(_.map(hdds, 'volume'), _.map(hdds, 'size')).reduce((o, [k, v]) => {
-      o[k] = o[k] ? o[k] + v : v; return o}, {}), (v) => {return v + 'B'});
+      o[k] = o[k] + v || v; return o}, {}), (v) => {return v + 'B'});
     res.json(result);
 });
 
