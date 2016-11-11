@@ -9,7 +9,7 @@ app.get('/task2c', (req, res) => {
     
     if (req.query.username)
     {
-        var matches = req.query.username.match(/(?:(?:https?:)?(?:\/\/)?.*?(?:\/))?@?([^\?\s\/]+)/i);
+        var matches = req.query.username.match(/(?:(?:https?:)?(?:\/\/)?.*?(?:\/))?@?([^\?#\s\/]+)/i);
         !matches[1] || (result = '@' + matches[1]);
     }
     res.send(result);
