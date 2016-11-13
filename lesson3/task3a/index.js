@@ -16,8 +16,11 @@ app.get('/task3a/volumes', (req, res) => {
 });
 
 app.get('/task3a/(*)', (req, res) => {
-    var value = req.params[0] ? _.get(model, req.params[0].split('/')) : model;
-    (value !== undefined) ? res.json(value) : res.status(404).send('Not found');
+    var params = req.params[0].split('/').filter(p => p);
+    var value = req.params[0] ? _.get(model, params) : model;
+    var flag = params.length == 0 || Object.keys(_.get(model, _.slice(params, 0, -1)) || model).indexOf(_.last(params)) > -1;
+    ((value !== undefined) && flag) ? res.json(value) : res.status(404).send('Not Found');
+});
 });
 
 app.listen(3000, () => {
